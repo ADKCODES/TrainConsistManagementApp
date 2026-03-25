@@ -1,33 +1,42 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
-public class UseCase2TrainConsistMgmnt {
+public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
         System.out.println("==========================================");
-        System.out.println(" UC2 - Add Passenger Bogies to Train ");
+        System.out.println(" === Train Consist Management App === ");
         System.out.println("==========================================\n");
 
         List<String> passengerBogies = new ArrayList<>();
+
+        System.out.println("--- Initializing Train ---");
+        System.out.println("Initial Bogie Count : " + passengerBogies.size());
 
         passengerBogies.add("Sleeper");
         passengerBogies.add("AC Chair");
         passengerBogies.add("First Class");
 
-        System.out.println("After Adding Bogies:");
-        System.out.println("Passenger Bogies : " + passengerBogies);
+        System.out.println("\n--- Managing Bogies (ArrayList) ---");
+        System.out.println("After Adding: " + passengerBogies);
 
         passengerBogies.remove("AC Chair");
-
-        System.out.println("\nAfter Removing 'AC Chair':");
-        System.out.println("Passenger Bogies : " + passengerBogies);
-
-        System.out.println("\nChecking if 'Sleeper' exists:");
+        System.out.println("After Removing 'AC Chair': " + passengerBogies);
         System.out.println("Contains Sleeper? : " + passengerBogies.contains("Sleeper"));
 
-        System.out.println("\nFinal Train Passenger Consist:");
-        System.out.println(passengerBogies);
+        System.out.println("\n--- Tracking Unique IDs (HashSet) ---");
+        Set<String> bogieIds = new HashSet<>();
 
-        System.out.println("\nUC2 operations completed successfully...");
+        bogieIds.add("BG101");
+        bogieIds.add("BG102");
+        bogieIds.add("BG103");
+        bogieIds.add("BG101");
+
+        System.out.println("Unique Bogie IDs: " + bogieIds);
+        System.out.println("Note: Duplicate 'BG101' was automatically ignored.");
+
+        System.out.println("\nAll operations completed successfully.");
     }
 }
