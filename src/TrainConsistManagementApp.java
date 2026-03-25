@@ -1,42 +1,34 @@
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.LinkedList;
 
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
         System.out.println("==========================================");
-        System.out.println(" === Train Consist Management App === ");
+        System.out.println(" UC4 - Maintain Ordered Bogie Consist ");
         System.out.println("==========================================\n");
 
-        List<String> passengerBogies = new ArrayList<>();
+        LinkedList<String> trainConsist = new LinkedList<>();
 
-        System.out.println("--- Initializing Train ---");
-        System.out.println("Initial Bogie Count : " + passengerBogies.size());
+        trainConsist.add("Engine");
+        trainConsist.add("Sleeper");
+        trainConsist.add("AC");
+        trainConsist.add("Cargo");
+        trainConsist.add("Guard");
 
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
+        System.out.println("Initial Train Consist:");
+        System.out.println(trainConsist);
 
-        System.out.println("\n--- Managing Bogies (ArrayList) ---");
-        System.out.println("After Adding: " + passengerBogies);
+        trainConsist.add(2, "Pantry Car");
 
-        passengerBogies.remove("AC Chair");
-        System.out.println("After Removing 'AC Chair': " + passengerBogies);
-        System.out.println("Contains Sleeper? : " + passengerBogies.contains("Sleeper"));
+        System.out.println("\nAfter Inserting 'Pantry Car' at position 2:");
+        System.out.println(trainConsist);
 
-        System.out.println("\n--- Tracking Unique IDs (HashSet) ---");
-        Set<String> bogieIds = new HashSet<>();
+        trainConsist.removeFirst();
+        trainConsist.removeLast();
 
-        bogieIds.add("BG101");
-        bogieIds.add("BG102");
-        bogieIds.add("BG103");
-        bogieIds.add("BG101");
+        System.out.println("\nAfter Removing First and Last Bogie:");
+        System.out.println(trainConsist);
 
-        System.out.println("Unique Bogie IDs: " + bogieIds);
-        System.out.println("Note: Duplicate 'BG101' was automatically ignored.");
-
-        System.out.println("\nAll operations completed successfully.");
+        System.out.println("\nUC4 ordered consist operations completed...");
     }
 }
