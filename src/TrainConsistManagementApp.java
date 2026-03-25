@@ -5,20 +5,17 @@ import java.util.stream.Collectors;
  * ==========================================================
  * MAIN CLASS - TrainConsistManagementApp
  * ==========================================================
- * Use Case 9: Group Bogies by Type
- * * Description:
- * This class groups similar bogies together using
- * Java Stream Collectors.groupingBy().
- * * Flow:
- * 1. User creates a list of bogies.
- * 2. System converts the list into a stream.
- * 3. groupingBy() collector is applied.
- * 4. Bogies are grouped into a Map.
- * 5. Grouped result is displayed.
+ * Use Case 10: Count Total Seats in Train
+ * ==========================================================
+ * Description:
+ * This class aggregates seating capacity of all bogies
+ * into a single total using Stream reduce().
+ * * @author Developer
+ * @version 10.0
  */
 public class TrainConsistManagementApp {
 
-    // Reusing Bogie model from UC7 / UC8
+    // Reusing Bogie model from previous Use Cases
     static class Bogie {
         String name;
         int capacity;
@@ -27,16 +24,11 @@ public class TrainConsistManagementApp {
             this.name = name;
             this.capacity = capacity;
         }
-
-        @Override
-        public String toString() {
-            return "Capacity -> " + capacity;
-        }
     }
 
     public static void main(String[] args) {
         System.out.println("==========================================");
-        System.out.println(" UC9 - Group Bogies by Type ");
+        System.out.println(" UC10 - Count Total Seats in Train ");
         System.out.println("==========================================\n");
 
         // 1. Create list of bogies
@@ -45,30 +37,23 @@ public class TrainConsistManagementApp {
         bogies.add(new Bogie("AC Chair", 56));
         bogies.add(new Bogie("First Class", 24));
         bogies.add(new Bogie("Sleeper", 70));
-        bogies.add(new Bogie("AC Chair", 60));
 
-        // 2. Display input bogies
-        System.out.println("All Bogies:");
+        // 2. Display bogies in Train
+        System.out.println("Bogies in Train:");
         for (Bogie b : bogies) {
             System.out.println(b.name + " -> " + b.capacity);
         }
 
-        // 3. GROUP USING COLLECTORS.GROUPINGBY
-        // collector.groupingBy(Bogie::getName) or lambda equivalent
-        Map<String, List<Bogie>> groupedBogies = bogies.stream()
-                .collect(Collectors.groupingBy(b -> b.name));
+        // 3. AGGREGATE USING REDUCE
+        // map() extracts capacity field from Bogie object
+        // reduce(0, Integer::sum) aggregates values into a total
+        int totalCapacity = bogies.stream()
+                .map(b -> b.capacity)
+                .reduce(0, Integer::sum);
 
-        // 4. Display grouped structure
-        System.out.println("\nGrouped Bogies:");
+        // 4. Display result
+        System.out.println("\nTotal Seating Capacity of Train: " + totalCapacity);
 
-        // Iterating through the Map to match the required output format
-        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
-            System.out.println("\nBogie Type: " + entry.getKey());
-            for (Bogie b : entry.getValue()) {
-                System.out.println("  " + b.toString());
-            }
-        }
-
-        System.out.println("\nUC9 grouping completed...");
+        System.out.println("\nUC10 aggregation completed...");
     }
 }
